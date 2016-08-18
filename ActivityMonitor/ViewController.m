@@ -7,8 +7,13 @@
 //
 
 #import "ViewController.h"
+#import "FeaturesTableViewController.h"
 
 @interface ViewController ()
+
+@property (nonatomic, strong) UINavigationController *navNC;
+
+@property (nonatomic, strong) FeaturesTableViewController *featureVC;
 
 @end
 
@@ -16,7 +21,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    self.view.backgroundColor = [UIColor redColor];
+    
+    _featureVC = [[FeaturesTableViewController alloc] init];
+    _navNC = [[UINavigationController alloc] initWithRootViewController:_featureVC];
+    _featureVC.title = @"Activity Tracker";
+    [self.view addSubview:_navNC.view];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -13,6 +13,11 @@
 		601BD3CA1D65903000E82A49 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 601BD3C81D65903000E82A49 /* Main.storyboard */; };
 		601BD3CC1D65903000E82A49 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 601BD3CB1D65903000E82A49 /* Assets.xcassets */; };
 		601BD3CF1D65903000E82A49 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 601BD3CD1D65903000E82A49 /* LaunchScreen.storyboard */; };
+		601BD3D71D6590A700E82A49 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 601BD3D61D6590A700E82A49 /* CoreMotion.framework */; };
+		601BD3DB1D65920900E82A49 /* ActivityHistoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 601BD3D91D65920900E82A49 /* ActivityHistoryTableViewController.m */; };
+		601BD3DC1D65920900E82A49 /* ActivityHistoryTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 601BD3DA1D65920900E82A49 /* ActivityHistoryTableViewController.xib */; };
+		601BD3E01D65A38800E82A49 /* FeaturesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 601BD3DE1D65A38800E82A49 /* FeaturesTableViewController.m */; };
+		601BD3E11D65A38800E82A49 /* FeaturesTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 601BD3DF1D65A38800E82A49 /* FeaturesTableViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +31,13 @@
 		601BD3CB1D65903000E82A49 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		601BD3CE1D65903000E82A49 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		601BD3D01D65903000E82A49 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		601BD3D61D6590A700E82A49 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		601BD3D81D65920900E82A49 /* ActivityHistoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityHistoryTableViewController.h; sourceTree = "<group>"; };
+		601BD3D91D65920900E82A49 /* ActivityHistoryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityHistoryTableViewController.m; sourceTree = "<group>"; };
+		601BD3DA1D65920900E82A49 /* ActivityHistoryTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityHistoryTableViewController.xib; sourceTree = "<group>"; };
+		601BD3DD1D65A38800E82A49 /* FeaturesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeaturesTableViewController.h; sourceTree = "<group>"; };
+		601BD3DE1D65A38800E82A49 /* FeaturesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeaturesTableViewController.m; sourceTree = "<group>"; };
+		601BD3DF1D65A38800E82A49 /* FeaturesTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeaturesTableViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				601BD3D71D6590A700E82A49 /* CoreMotion.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +55,7 @@
 		601BD3B31D65903000E82A49 = {
 			isa = PBXGroup;
 			children = (
+				601BD3D61D6590A700E82A49 /* CoreMotion.framework */,
 				601BD3BE1D65903000E82A49 /* ActivityMonitor */,
 				601BD3BD1D65903000E82A49 /* Products */,
 			);
@@ -62,6 +76,12 @@
 				601BD3C31D65903000E82A49 /* AppDelegate.m */,
 				601BD3C51D65903000E82A49 /* ViewController.h */,
 				601BD3C61D65903000E82A49 /* ViewController.m */,
+				601BD3DD1D65A38800E82A49 /* FeaturesTableViewController.h */,
+				601BD3DE1D65A38800E82A49 /* FeaturesTableViewController.m */,
+				601BD3DF1D65A38800E82A49 /* FeaturesTableViewController.xib */,
+				601BD3D81D65920900E82A49 /* ActivityHistoryTableViewController.h */,
+				601BD3D91D65920900E82A49 /* ActivityHistoryTableViewController.m */,
+				601BD3DA1D65920900E82A49 /* ActivityHistoryTableViewController.xib */,
 				601BD3C81D65903000E82A49 /* Main.storyboard */,
 				601BD3CB1D65903000E82A49 /* Assets.xcassets */,
 				601BD3CD1D65903000E82A49 /* LaunchScreen.storyboard */,
@@ -137,8 +157,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				601BD3CF1D65903000E82A49 /* LaunchScreen.storyboard in Resources */,
+				601BD3DC1D65920900E82A49 /* ActivityHistoryTableViewController.xib in Resources */,
 				601BD3CC1D65903000E82A49 /* Assets.xcassets in Resources */,
 				601BD3CA1D65903000E82A49 /* Main.storyboard in Resources */,
+				601BD3E11D65A38800E82A49 /* FeaturesTableViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,6 +172,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				601BD3C71D65903000E82A49 /* ViewController.m in Sources */,
+				601BD3E01D65A38800E82A49 /* FeaturesTableViewController.m in Sources */,
+				601BD3DB1D65920900E82A49 /* ActivityHistoryTableViewController.m in Sources */,
 				601BD3C41D65903000E82A49 /* AppDelegate.m in Sources */,
 				601BD3C11D65903000E82A49 /* main.m in Sources */,
 			);
