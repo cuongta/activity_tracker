@@ -23,10 +23,10 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor redColor];
     
-    _featureVC = [[FeaturesTableViewController alloc] init];
-    _navNC = [[UINavigationController alloc] initWithRootViewController:_featureVC];
-    _featureVC.title = @"Activity Tracker";
-    [self.view addSubview:_navNC.view];
+//    _featureVC = [[FeaturesTableViewController alloc] init];
+//    _navNC = [[UINavigationController alloc] initWithRootViewController:_featureVC];
+//    _featureVC.title = @"Activity Tracker";
+//    [self.view addSubview:_navNC.view];
 }
 
 - (void)didReceiveMemoryWarning {
