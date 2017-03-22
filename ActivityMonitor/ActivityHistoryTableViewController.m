@@ -46,17 +46,17 @@
     NSDate *now = [NSDate date];
     NSDate *eightHoursAgo = [now dateByAddingTimeInterval:-24*60*60];
     [_motionActivityMgr queryActivityStartingFromDate:eightHoursAgo toDate:now toQueue:[NSOperationQueue mainQueue] withHandler:^(NSArray<CMMotionActivity *> * _Nullable activities, NSError * _Nullable error) {
-        NSLog(@"activities = %@", activities);
+//        NSLog(@"activities = %@", activities);
         
+        // sort descending order
         NSArray *sorted = [NSArray arrayWithArray:[activities sortedArrayUsingComparator:^NSComparisonResult(CMMotionActivity *obj1, CMMotionActivity *obj2) {
-            if (([obj1.startDate compare:obj2.startDate]) == NSOrderedDescending) {
-                return (NSComparisonResult)NSOrderedDescending;
-            } else {
-                return (NSComparisonResult)NSOrderedDescending;
-            }
+            NSTimeInterval t1 = [obj1.startDate timeIntervalSince1970];
+            NSTimeInterval t2 = [obj2.startDate timeIntervalSince1970];
+            return (t1 < t2);
         }]];
         
         _activities = [sorted mutableCopy];
+//        NSLog(@"activities = %@", activities);
         [self.tableView reloadData];
     }];
 }
@@ -86,11 +86,6 @@
     }];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -104,16 +99,13 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-    }
-    
     CMMotionActivity *activity = [_activities objectAtIndex:indexPath.row];
     
-    NSDateFormatter* df_local = [[NSDateFormatter alloc] init];
-    [df_local setTimeZone:[NSTimeZone localTimeZone]];
-    [df_local setDateFormat:@"yyyy/MM/dd hh:mm:ss zzz"];
-    NSString *localTime = [df_local stringFromDate:activity.startDate];
+//    NSISO8601DateFormatter *fmt = [[NSISO8601DateFormatter alloc] init];
+    NSDateFormatter *fmt = [[NSDateFormatter alloc] init];
+    [fmt setDateFormat:@"MM/dd/yyyy hh:mm:ss a"];
+    [fmt setTimeZone:[NSTimeZone localTimeZone]];
+    NSString *localTime = [fmt stringFromDate:activity.startDate];
     
     if (activity.automotive) {
         cell.textLabel.text = [NSString stringWithFormat:@"%@ - automotive 🚗",localTime];
@@ -123,73 +115,11 @@
         cell.textLabel.text = [NSString stringWithFormat:@"%@ - running 🏃",localTime];
     } else if (activity.stationary) {
         cell.textLabel.text = [NSString stringWithFormat:@"%@ - stationary 🛑",localTime];
-    } else if (activity.unknown) {
+    } else {
         cell.textLabel.text = [NSString stringWithFormat:@"%@ - unknown ",localTime];
     }
     
     return cell;
 }
-
-
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Table view delegate
-
-// In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here, for example:
-    // Create the next view controller.
-    <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:<#@"Nib name"#> bundle:nil];
-    
-    // Pass the selected object to the new view controller.
-    
-    // Push the view controller.
-    [self.navigationController pushViewController:detailViewController animated:YES];
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
