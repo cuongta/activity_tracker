@@ -47,6 +47,12 @@
     NSDate *eightHoursAgo = [now dateByAddingTimeInterval:-24*60*60];
     [_motionActivityMgr queryActivityStartingFromDate:eightHoursAgo toDate:now toQueue:[NSOperationQueue mainQueue] withHandler:^(NSArray<CMMotionActivity *> * _Nullable activities, NSError * _Nullable error) {
         NSLog(@"activities = %@", activities);
+        
+        NSMutableArray *mutableActivities = [[NSMutableArray alloc] initWithCapacity:activities.count];
+        [activities enumerateObjectsUsingBlock:^(CMMotionActivity * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            
+        }];
+        
         _activities = [activities mutableCopy];
         [self.tableView reloadData];
     }];
@@ -100,7 +106,17 @@
     }
     
     CMMotionActivity *activity = [_activities objectAtIndex:indexPath.row];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@ - automotive %d",activity.startDate, activity.automotive];
+    if (activity.automotive) {
+        cell.textLabel.text = [NSString stringWithFormat:@"%@ - automotive 🚗",activity.startDate];
+    } else if (activity.walking) {
+        cell.textLabel.text = [NSString stringWithFormat:@"%@ - walking 🚶",activity.startDate];
+    } else if (activity.running) {
+        cell.textLabel.text = [NSString stringWithFormat:@"%@ - running 🏃",activity.startDate];
+    } else if (activity.stationary) {
+        cell.textLabel.text = [NSString stringWithFormat:@"%@ - stationary 🛑",activity.startDate];
+    } else if (activity.unknown) {
+        cell.textLabel.text = [NSString stringWithFormat:@"%@ - unknown ",activity.startDate];
+    }
     
     return cell;
 }
