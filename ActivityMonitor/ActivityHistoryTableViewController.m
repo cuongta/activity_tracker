@@ -48,12 +48,15 @@
     [_motionActivityMgr queryActivityStartingFromDate:eightHoursAgo toDate:now toQueue:[NSOperationQueue mainQueue] withHandler:^(NSArray<CMMotionActivity *> * _Nullable activities, NSError * _Nullable error) {
         NSLog(@"activities = %@", activities);
         
-        NSMutableArray *mutableActivities = [[NSMutableArray alloc] initWithCapacity:activities.count];
-        [activities enumerateObjectsUsingBlock:^(CMMotionActivity * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            
-        }];
+        NSArray *sorted = [NSArray arrayWithArray:[activities sortedArrayUsingComparator:^NSComparisonResult(CMMotionActivity *obj1, CMMotionActivity *obj2) {
+            if (([obj1.startDate compare:obj2.startDate]) == NSOrderedDescending) {
+                return (NSComparisonResult)NSOrderedDescending;
+            } else {
+                return (NSComparisonResult)NSOrderedDescending;
+            }
+        }]];
         
-        _activities = [activities mutableCopy];
+        _activities = [sorted mutableCopy];
         [self.tableView reloadData];
     }];
 }
@@ -106,16 +109,22 @@
     }
     
     CMMotionActivity *activity = [_activities objectAtIndex:indexPath.row];
+    
+    NSDateFormatter* df_local = [[NSDateFormatter alloc] init];
+    [df_local setTimeZone:[NSTimeZone localTimeZone]];
+    [df_local setDateFormat:@"yyyy/MM/dd hh:mm:ss zzz"];
+    NSString *localTime = [df_local stringFromDate:activity.startDate];
+    
     if (activity.automotive) {
-        cell.textLabel.text = [NSString stringWithFormat:@"%@ - automotive 🚗",activity.startDate];
+        cell.textLabel.text = [NSString stringWithFormat:@"%@ - automotive 🚗",localTime];
     } else if (activity.walking) {
-        cell.textLabel.text = [NSString stringWithFormat:@"%@ - walking 🚶",activity.startDate];
+        cell.textLabel.text = [NSString stringWithFormat:@"%@ - walking 🚶",localTime];
     } else if (activity.running) {
-        cell.textLabel.text = [NSString stringWithFormat:@"%@ - running 🏃",activity.startDate];
+        cell.textLabel.text = [NSString stringWithFormat:@"%@ - running 🏃",localTime];
     } else if (activity.stationary) {
-        cell.textLabel.text = [NSString stringWithFormat:@"%@ - stationary 🛑",activity.startDate];
+        cell.textLabel.text = [NSString stringWithFormat:@"%@ - stationary 🛑",localTime];
     } else if (activity.unknown) {
-        cell.textLabel.text = [NSString stringWithFormat:@"%@ - unknown ",activity.startDate];
+        cell.textLabel.text = [NSString stringWithFormat:@"%@ - unknown ",localTime];
     }
     
     return cell;
